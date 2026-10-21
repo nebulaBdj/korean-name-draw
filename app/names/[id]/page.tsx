@@ -7,6 +7,7 @@ import { ScaledNameCard } from "@/components/name-card/NameCard";
 import { NameReceipt } from "@/components/receipt/NameReceipt";
 import { ResultShell } from "@/components/result/ResultShell";
 import styles from "@/components/result/result.module.css";
+import { SITE } from "@/config/site";
 import { getName, names, toTitleRoman, type KoreanName } from "@/lib/names";
 
 type Params = { params: Promise<{ id: string }> };
@@ -44,9 +45,20 @@ export default async function NamePage({ params }: Params) {
   const name = getName((await params).id);
   if (!name) notFound();
   const roman = toTitleRoman(name.roman);
+  // Home › Names › Garam (SPEC §16-4)
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.url },
+      { "@type": "ListItem", position: 2, name: "Names", item: `${SITE.url}/names` },
+      { "@type": "ListItem", position: 3, name: roman, item: `${SITE.url}/names/${name.id}` },
+    ],
+  };
 
   return (
     <main className={screen.screen}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumb) }} />
       <Header />
       <ResultShell
         name={name}
