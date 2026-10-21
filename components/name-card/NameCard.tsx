@@ -7,6 +7,7 @@ type NameCardProps = {
   roman: string;
   meaning: string;
   message?: string;
+  blank?: boolean; // 이름 칸을 비운 템플릿 (스토리 이미지용 PNG를 만들 때)
 };
 
 function Burst({ color, flip = false }: { color: string; flip?: boolean }) {
@@ -101,7 +102,7 @@ function WalkMap() {
 }
 
 // 신문 카드 원본 크기(397×561). 결과 화면에서는 ScaledNameCard로 0.7배
-export function NameCard({ hangul, roman, meaning, message }: NameCardProps) {
+export function NameCard({ hangul, roman, meaning, message, blank = false }: NameCardProps) {
   return (
     <div className={`${styles.card} ${ibmPlexSansKr.className}`}>
       <div className={styles.rule} />
@@ -120,13 +121,17 @@ export function NameCard({ hangul, roman, meaning, message }: NameCardProps) {
         <div className={`${styles.yourNameText} ${anton.className}`}>YOUR NAME</div>
         <Burst color="#4A9BF5" flip />
       </div>
-      <div className={styles.nameBox}>
-        <div className={`${styles.hangul} ${blackHanSans.className}`} lang="ko">
-          {hangul}
-        </div>
-        <div className={styles.roman}>{roman}</div>
-        <div className={styles.meaning}>“{meaning}”</div>
-        {message && <div className={styles.message}>{message}</div>}
+      <div className={styles.nameBox} data-name-box>
+        {!blank && (
+          <>
+            <div className={`${styles.hangul} ${blackHanSans.className}`} lang="ko">
+              {hangul}
+            </div>
+            <div className={styles.roman}>{roman}</div>
+            <div className={styles.meaning}>“{meaning}”</div>
+            {message && <div className={styles.message}>{message}</div>}
+          </>
+        )}
       </div>
       <div className={styles.divider} />
       <WalkMap />

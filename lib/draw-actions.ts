@@ -1,3 +1,4 @@
+import { track } from "@/lib/analytics";
 import { isEventOver, makeCouponCode, sendCoupon } from "@/lib/coupon";
 import { pickRandomName } from "@/lib/draw";
 import { readDraw, readSource, writeDraw, type DrawRecord } from "@/lib/storage";
@@ -7,6 +8,7 @@ export function syncCoupon(record: DrawRecord): void {
   if (record.sent || !record.code) return;
   void sendCoupon({ code: record.code, nameId: record.nameId, source: readSource() }).then((ok) => {
     const latest = readDraw();
+    if (!ok) track("coupon_error", { reason: "network" });
     if (ok && latest && latest.code === record.code) writeDraw({ ...latest, sent: true });
   });
 }
@@ -30,5 +32,6 @@ export function drawFirst(): DrawRecord {
 export function drawAgain(current: DrawRecord): DrawRecord {
   const record: DrawRecord = { ...current, nameId: pickRandomName(current.nameId).id, redrawn: true };
   writeDraw(record);
+  track("draw_complete", { name_id: record.nameId, coupon_code: record.code || "none", is_redraw: true });
   return record;
 }

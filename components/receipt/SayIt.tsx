@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { track } from "@/lib/analytics";
 import styles from "./receipt.module.css";
 
 function hasKoreanVoice(): boolean {
@@ -8,7 +9,7 @@ function hasKoreanVoice(): boolean {
 }
 
 // 발음 ▶: Web Speech API로 한글 이름을 읽는다. 한국어 음성이 없으면 ▶만 숨긴다
-export function SayIt({ hangul, onPlay }: { hangul: string; onPlay?: () => void }) {
+export function SayIt({ hangul, nameId }: { hangul: string; nameId: string }) {
   const [available, setAvailable] = useState(false);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export function SayIt({ hangul, onPlay }: { hangul: string; onPlay?: () => void 
     utterance.rate = 0.8;
     window.speechSynthesis.cancel();
     window.speechSynthesis.speak(utterance);
-    onPlay?.();
+    track("pronounce_click", { name_id: nameId });
   };
 
   return (

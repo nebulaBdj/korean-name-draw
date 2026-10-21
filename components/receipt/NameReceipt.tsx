@@ -20,7 +20,7 @@ export function NameReceipt({ name }: { name: KoreanName }) {
         <span>발음 SAY IT</span>
         <span className={styles.sayItLine} />
         <span className={styles.strong}>{name.soundsLike ?? name.roman}</span>
-        <SayIt hangul={name.hangul} />
+        <SayIt hangul={name.hangul} nameId={name.id} />
       </div>
       <Dash />
       <Leader label="합계 TOTAL" value="₩0 FREE" fontSize={14} strong />

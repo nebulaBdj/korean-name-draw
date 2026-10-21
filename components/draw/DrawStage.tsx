@@ -9,6 +9,7 @@ import { Paper } from "@/components/receipt/Paper";
 import { Scissors } from "@/components/receipt/Scissors";
 import { Slot } from "@/components/receipt/Slot";
 import screen from "@/components/layout/screen.module.css";
+import { track } from "@/lib/analytics";
 import { couponStateFor } from "@/lib/coupon";
 import { drawFirst } from "@/lib/draw-actions";
 import { getName, type KoreanName } from "@/lib/names";
@@ -46,7 +47,9 @@ export function DrawStage({ intro, receipt }: DrawStageProps) {
   }, [printing, router]);
 
   const print = () => {
+    track("draw_start");
     const record = drawFirst();
+    track("draw_complete", { name_id: record.nameId, coupon_code: record.code || "none", is_redraw: false });
     const name = getName(record.nameId);
     if (!name) return;
     router.prefetch(resultPath(name.id));

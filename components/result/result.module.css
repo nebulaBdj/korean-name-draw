@@ -84,3 +84,85 @@
   font-size: 13px;
   color: var(--on-cobalt-sub);
 }
+
+/* 공유 시트 위 안내 (design/F4Share) */
+.shareOverlay {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: rgba(8, 12, 40, 0.55);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30vh;
+}
+
+.bubble {
+  background: var(--yolk);
+  color: var(--button-dark);
+  font-size: 13px;
+  font-weight: 700;
+  line-height: 1.45;
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1.5px solid var(--button-dark);
+}
+
+/* 길게 눌러 저장 (design/F6Fallback) */
+.fallback {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.notice {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: var(--yolk);
+  color: var(--button-dark);
+  border: 1.5px solid var(--button-dark);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.fallbackTitle {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.storyImage {
+  align-self: center;
+  width: 270px;
+  height: 480px;
+  border: 2px solid #ffffff;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  -webkit-touch-callout: default;
+}
+
+.steps {
+  margin: 0;
+  padding-left: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 12.5px;
+  line-height: 1.45;
+}
+
+.back {
+  align-self: center;
+  border: 0;
+  background: none;
+  color: #ffffff;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 700;
+  padding: 4px 8px;
+  cursor: pointer;
+}
