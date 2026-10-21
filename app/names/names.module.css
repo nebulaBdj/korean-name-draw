@@ -1,0 +1,53 @@
+/* 이름 목록 (SPEC §3-9) */
+.title {
+  margin: 0;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.intro {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--on-cobalt-sub);
+}
+
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.card {
+  display: block;
+  height: 100%;
+  padding: 12px 12px 10px;
+  background: var(--paper);
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 12px;
+  line-height: 1.45;
+  box-shadow: 0 8px 12px rgba(8, 14, 70, 0.25);
+}
+
+.hangul {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.roman {
+  font-weight: 700;
+  border-bottom: 1.5px dashed var(--ink);
+  padding-bottom: 4px;
+  margin-bottom: 4px;
+}
+
+.meaning {
+  color: var(--ink-sub);
+}

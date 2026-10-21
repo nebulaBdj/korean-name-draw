@@ -1,0 +1,184 @@
+/* 신문 카드 계란일보 (design/NameCard.dc.html, 397×561) */
+.card {
+  width: 397px;
+  height: 561px;
+  padding: 16px 20px 14px;
+  background: #ffffff;
+  color: #161616;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  overflow: hidden;
+}
+
+.rule {
+  border-top: 3px solid #161616;
+  border-bottom: 1px solid #161616;
+  height: 2px;
+  flex: none;
+}
+
+.masthead {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex: none;
+}
+
+.mastSide {
+  flex: 1 1 0;
+  border-bottom: 1px solid #161616;
+  font-size: 12px;
+  padding-bottom: 2px;
+}
+
+.mastTitle {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 24px;
+  line-height: 1;
+}
+
+.yourName {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 2px;
+  flex: none;
+}
+
+.yourNameText {
+  font-size: 54px;
+  line-height: 1;
+  letter-spacing: 0.01em;
+}
+
+.nameBox {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  border: 2.5px solid #161616;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  padding: 6px 12px;
+  overflow: hidden;
+}
+
+.hangul {
+  font-size: 70px;
+  line-height: 1.02;
+  letter-spacing: 0.06em;
+}
+
+.roman {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.meaning {
+  font-size: 12px;
+  font-weight: 500;
+  background: #f7c430;
+  padding: 1px 9px;
+  margin-top: 2px;
+  text-align: center;
+}
+
+.message {
+  font-size: 11px;
+  font-style: italic;
+  line-height: 1.35;
+  text-align: center;
+  color: #2b2b2b;
+  max-width: 300px;
+  margin-top: 3px;
+}
+
+.divider {
+  border-top: 1.5px solid #161616;
+  margin-top: 2px;
+  flex: none;
+}
+
+.map {
+  display: block;
+  flex: none;
+}
+
+.address {
+  background: #efefef;
+  border-radius: 10px;
+  padding: 4px 10px;
+  font-size: 10.5px;
+  line-height: 1.35;
+  flex: none;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 4px;
+  padding-top: 2px;
+  flex: none;
+}
+
+.footerText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.photoLine {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.photoText {
+  font-size: 14px;
+  line-height: 1.1;
+  white-space: nowrap;
+}
+
+.handle {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+  padding-left: 10px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.qr {
+  width: 57px;
+  height: 57px;
+  display: block;
+  flex: none;
+  margin-right: -5px;
+  margin-left: -4px;
+}
+
+/* 결과 화면용 0.7배 축소 (278×393) */
+.scaled {
+  width: 278px;
+  height: 393px;
+  overflow: hidden;
+  outline: 1px solid #e3e3e3;
+}
+
+.scaledInner {
+  width: 397px;
+  height: 561px;
+  transform-origin: 0 0;
+  transform: scale(0.7);
+}

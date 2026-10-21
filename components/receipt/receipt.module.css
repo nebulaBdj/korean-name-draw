@@ -67,3 +67,124 @@
   display: flex;
   justify-content: center;
 }
+
+.bodyAfterTop {
+  padding-top: 6px;
+}
+
+.center {
+  text-align: center;
+}
+
+/* 읽는 법 자모 칸 */
+.jamoRow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  row-gap: 6px;
+  margin-top: 4px;
+}
+
+.jamoGroup {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.jamoPair {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.jamoTile {
+  width: 20px;
+  height: 20px;
+  border: 1.5px solid var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.jamoEquals {
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.sayIt {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 6px;
+  min-height: 24px;
+}
+
+.sayItLine {
+  flex: 1 1 auto;
+  align-self: flex-end;
+  margin-bottom: 7px;
+  border-bottom: 1.5px dotted var(--ink);
+}
+
+.play {
+  width: 24px;
+  height: 24px;
+  flex: none;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  background: var(--ink);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.scissors {
+  position: relative;
+  height: 22px;
+  background: var(--paper);
+}
+
+.scissorsLine {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 10px;
+  border-top: 2px dashed #a9b0c4;
+}
+
+.scissorsIcon {
+  position: absolute;
+  left: 10px;
+  top: 3px;
+}
+
+.cardTop {
+  background: var(--paper);
+  padding: 16px 11px 0;
+}
+
+/* 쿠폰 */
+.couponTitle {
+  text-align: center;
+  font-weight: 700;
+}
+
+.couponNote {
+  text-align: center;
+  font-size: 11px;
+  line-height: 1.45;
+  color: var(--ink-sub);
+}
+
+.couponCode {
+  text-align: center;
+  font-family: var(--font-mono), monospace;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  margin-top: 2px;
+}

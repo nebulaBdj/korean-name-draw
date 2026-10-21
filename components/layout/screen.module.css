@@ -1,0 +1,128 @@
+/* 모든 화면 공통: 코발트 배경 위 모바일 폭 기둥, 머리줄, 버튼 */
+.screen {
+  max-width: 430px;
+  min-height: 100svh;
+  margin: 0 auto;
+  padding: 20px 22px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+}
+
+.logo {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo::after {
+  content: "";
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--yolk);
+}
+
+.handle {
+  font-size: 12px;
+  color: var(--on-cobalt-muted);
+  text-decoration: none;
+}
+
+.title {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 54px;
+  flex: none;
+  border: 0;
+  border-radius: 12px;
+  font: inherit;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.buttonDark {
+  background: var(--button-dark);
+  color: #ffffff;
+}
+
+.buttonWhite {
+  background: #ffffff;
+  color: var(--cobalt);
+}
+
+.buttonOutline {
+  height: 48px;
+  border: 2px solid #ffffff;
+  background: transparent;
+  color: #ffffff;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
+.links {
+  display: flex;
+  justify-content: center;
+  gap: 18px;
+  font-size: 12px;
+  color: var(--on-cobalt-muted);
+}
+
+.linkButton {
+  border: 0;
+  padding: 4px 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+.srOnly {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,65 @@
+/* 인쇄 연출 (design/F2Print.dc.html) */
+.printing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: var(--on-cobalt-sub);
+}
+
+.blink {
+  width: 10px;
+  height: 10px;
+  flex: none;
+  border-radius: 50%;
+  background: var(--yolk);
+  animation: blink 0.9s ease-in-out infinite;
+}
+
+.feedWindow {
+  position: relative;
+  z-index: 1;
+  margin-top: -8px;
+  width: 100%;
+  max-width: 346px;
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
+}
+
+/* 종이 아래쪽부터 한 줄씩 끊기듯 내려온다 */
+.feed {
+  margin: 0 auto;
+  animation: feed 1.6s steps(14, end) forwards;
+}
+
+.blank {
+  height: 22px;
+  background: var(--paper);
+}
+
+@keyframes feed {
+  from {
+    transform: translateY(-100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.25;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .feed,
+  .blink {
+    animation: none;
+  }
+}

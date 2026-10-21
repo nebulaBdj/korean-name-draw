@@ -70,14 +70,13 @@
 
 ### 3-1. 랜딩 `/`
 - 머리줄: 노른자 로고 + `YOLK MART 24`, 오른쪽 `@seoul.yolk`
-- 제목(h1) `What's your Korean name?`, 부제 `Print a free Korean name, Seoul convenience-store style.`
+- 제목(h1) `What's your Korean name?`, 부제 `Get a free Korean name made from native Korean words.`
 - 가운데: 프린터 슬롯 + 아직 비어 있는 영수증
-  - `YOLK MART 24` / `성수 팝업점 · Seongsu pop-up` / 오늘 날짜·현재 시각
-  - 품목: `한국 이름 Korean name 1`, `신문 카드 Newspaper card 1+1`, `부스 할인 쿠폰 Booth coupon 1`
-  - `이름 NAME ··· ? ?`, `뜻 MEANING ··· ???`, `합계 TOTAL ··· ₩0 FREE`, 바코드, `감사합니다! Thank you!`
-  - 오른쪽 위 `1+1` 스티커(`name+paper`)
+  - `YOLK MART 24` / `Seongsu pop-up` (시각 줄 없음, 10-21 가독성 개선)
+  - 받는 것만: `Korean name ··· 1`, `Newspaper card ··· 1`, `Booth coupon ··· 1`, `TOTAL ··· ₩0 FREE`, 바코드, `감사합니다! Thank you!`
+  - 오른쪽 위 `FREE` 스티커(`10 sec`). 1+1은 뜻이 애매해 뺐다
 - 버튼 하나: `PRINT MY NAME →`
-- 아래: `Oct 23–24 · The Gabae Seongsu · 12:00–19:00`, `Free · takes 10 seconds`
+- 아래: `Oct 23–24 · The Gabae Seongsu · 12:00–19:00`
 - **스크롤 아래 (검색용 본문, 같은 영수증 스타일)**
   - `What's a native Korean name?` — Native Korean names (순우리말) come from everyday Korean words, not Chinese characters. 하늘 (Haneul) means “sky” and 가람 (Garam) means “river”.
   - `How it works` — 1. Print your name 2. Learn how to write and say it 3. Share it (행사 중에는 `Get it printed in a real newspaper photo at our pop-up` 단계 추가)
@@ -88,15 +87,15 @@
     - `How many names are there?` — 40 native Korean names. `See all 40 names →` (`/names`)
 
 ### 3-2. 인쇄 연출 (약 1.6초)
-- 버튼을 누르면 `names.json`에서 균등 확률로 이름을 고르고, **동시에 쿠폰 코드를 요청**한다(§5).
+- 버튼을 누르면 `names.json`에서 균등 확률로 이름을 고르고, **폰에서 쿠폰 코드를 바로 만든다**(§5). 시트 기록은 응답을 기다리지 않는다.
 - 제목 `Printing your Korean name…`, 노른자 점이 깜빡이는 `PRINTING…`
 - 영수증이 슬롯에서 한 줄씩 끊기듯 내려온다(`steps()` 애니메이션, 키프레임은 F2Print 파일의 helmet 참고). 종이 아래쪽(감사 인사·바코드)부터 나오고 이름 줄이 마지막에 나온다.
-- 쿠폰 응답이 늦으면 마지막 프레임에서 기다린다(최대 5초, §5-3). 끝나면 `router.push('/names/{id}')`로 결과 페이지로 간다. 손댈 필요가 없어 인앱 브라우저에서도 안정적이다.
+- 연출이 끝나면 `router.push('/names/{id}')`로 결과 페이지로 간다. 쿠폰 때문에 기다리는 일은 없다.
 - `prefers-reduced-motion`이면 연출 없이 바로 결과. 소리는 없다.
 
 ### 3-3. 결과 `/names/[id]` (뽑은 사람)
 - localStorage에 이 이름을 뽑은 기록이 있으면 이 화면이다(없으면 3-8).
-- 위: `PRINTED!` + 발급 시각 · `No.0417`(쿠폰 번호 앞 4자리, 공통 코드 방식이면 시각만)
+- 위: `PRINTED!` + 발급 시각
 - 프린터 슬롯에서 이어져 나온 **한 장의 종이**(폭 300px):
   1. **신문 카드** (NameCard, §7-4) — 저장·공유 이미지와 같은 그림
   2. **가위 점선** — 위는 공유 이미지, 아래는 화면 전용
@@ -172,20 +171,18 @@
 | `"rule"` | 2안: 키오스크가 규칙으로 개별 코드 확인 가능 | 5-1처럼 스크립트가 발급하되 뒤 2글자를 **비밀 규칙**(비밀 키로 만든 HMAC)으로 만든다. 같은 규칙을 키오스크가 확인하고 사용 기록을 남긴다. 규칙·비밀 키는 Apps Script와 업체에만 두고 사이트 코드에는 넣지 않는다 |
 | `"sheet"` | 3안: 직원 확인 + 키오스크 할인 버튼 | 아래 5-1~5-5 그대로. 직원이 시트에서 확인·체크한 뒤 키오스크 버튼으로 할인가 결제 |
 
-### 5-1. 발급: 구글 Apps Script (`"sheet"`, `"rule"`)
-- 뽑을 때 사이트가 Apps Script 웹 앱에 GET 요청을 한 번 보낸다(`?name={id}&src={utm_source}`). 단순 GET이라 CORS 사전 요청 없이 동작한다.
-- 스크립트가 **순번 + 글자 2개**로 코드를 만들고 시트에 한 줄을 추가한 뒤 `{ "code": "0417-KM" }`를 돌려준다.
-  - 순번(0001, 0002, …)이 **겹치지 않음을 보장**하고, 글자 2개(`ABCDEFGHJKMNPQRSTUVWXYZ23456789`)는 남의 번호를 짐작해서 쓰는 것을 막는다.
+### 5-1. 발급: 폰에서 바로 + 시트에 기록 (`"sheet"`, `"rule"`)
+- 2026-10-21 변경: Apps Script 응답이 첫 호출 5.4초, 평소 약 2.4초라 기다리지 않도록 바꿨다.
+- 뽑는 순간 폰이 코드를 만든다: 영문 대문자·숫자 6자(0·O·1·I·L 제외) `XXX-XXX`, `crypto.getRandomValues`. 1천 건 기준 겹칠 확률 약 0.06%.
+- 동시에 Apps Script 웹 앱에 `?code=&name={id}&src={utm_source}` GET을 보낸다(`no-cors`, `keepalive`). 응답은 기다리지 않는다.
+- 스크립트는 같은 코드가 시트에 없을 때만 한 줄을 추가한다(재전송해도 한 줄). `LockService`로 차례로 처리한다.
+- 지어낸 코드는 시트에 없으므로 부스에서 걸러진다.
 
-### 5-2. 안 겹치게 하는 조건 (반드시 지킬 것)
-1. 번호는 **스크립트에서만** 매긴다. 폰에서 쿠폰 번호를 만들지 않는다.
-2. 번호를 매길 때 `LockService`로 잠근다. 동시에 두 요청이 와도 차례로 처리된다.
-3. 번호는 시트 행 수가 아니라 **Script Properties에 저장한 카운터**로 센다. 시트에서 행을 지워도 번호가 재사용되지 않는다.
-
-### 5-3. 실패할 때
-- 요청 제한 시간 5초, 실패하면 1회 재시도.
-- 그래도 실패하면 코드를 만들지 않는다. 쿠폰 자리에 `Show this screen at the booth`만 띄우고 GA4 `coupon_error`를 보낸다. 부스에서는 결과 화면을 확인하고 시트 맨 아래에 직접 한 줄 추가(코드 칸에 `현장`, 이름 칸에 화면의 이름) 후 할인한다.
-- 받은 코드는 localStorage에 저장한다. 다시 뽑기나 재방문 때는 요청하지 않는다.
+### 5-2. 전달 실패
+- 네트워크 오류로 전달되지 않으면 localStorage의 `sent: false`로 남고, 결과 화면을 다시 열 때 재전송한다.
+- 그래도 시트에 없으면 부스에서 결과 화면을 확인하고 시트 맨 아래에 직접 한 줄 추가(코드 칸에 화면의 코드) 후 할인한다.
+- `NEXT_PUBLIC_COUPON_URL`이 없으면 코드 대신 `Show this screen at the booth`를 보여준다.
+- 다시 뽑기·재방문 때는 같은 코드를 쓴다(1인 1쿠폰).
 
 ### 5-4. 시트와 스크립트
 - 시트 이름 `쿠폰`, 1행은 제목: `A 코드 | B 발급 시각 | C 이름 id | D 유입(utm_source) | E 사용 | F 사용 시각`.
@@ -193,8 +190,8 @@
 - 스크립트: `apps-script/Code.gs` (시트 메뉴 '확장 프로그램 > Apps Script'에 붙여 넣고 '웹 앱'으로 배포, 실행: 나, 액세스: 모든 사용자). `"rule"` 모드가 정해지면 뒤 2글자 만드는 부분만 바꾼다.
 
 ### 5-5. 부스에서 확인하는 법 (`"sheet"`)
-1. 손님 폰의 결과 화면에서 쿠폰 코드를 본다(예: `0417-KM`).
-2. 구글 시트 앱에서 앞 4자리(`0417`)를 검색하고 뒤 글자(`KM`)가 같은지 본다.
+1. 손님 폰의 결과 화면에서 쿠폰 코드를 본다(예: `8KE-YGH`).
+2. 구글 시트 앱에서 코드를 검색한다.
 3. '사용' 칸이 비어 있으면 체크하고 키오스크 할인 버튼으로 결제한다. 이미 체크돼 있으면 사용된 쿠폰이다.
 
 ## 6. 스토리 이미지 (저장·공유)
