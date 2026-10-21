@@ -1,0 +1,32 @@
+:root {
+  /* SPEC §7-1 */
+  --cobalt: #2d46f5;
+  --slot: #101c78;
+  --paper: #ffffff;
+  --ink: #1a1a1a;
+  --ink-sub: #666666;
+  --on-cobalt-sub: #dce2ff;
+  --on-cobalt-muted: #c9d2ff;
+  --yolk: #ffc21a;
+  --button-dark: #0e0e12;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--cobalt);
+  color: #ffffff;
+}
+
+body {
+  font-family: var(--font-mono), monospace;
+  -webkit-text-size-adjust: 100%;
+}
+
+a {
+  color: inherit;
+}

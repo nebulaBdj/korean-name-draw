@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Final 6 — in-app save fallback</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding:wght@400;700&amp;family=Space+Mono:wght@400;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 390px; height: 844px; padding: 16px 20px 22px; box-sizing: border-box; background: #2D46F5; color: #FFFFFF; font-family: 'Space Mono', monospace; display: flex; flex-direction: column; gap: 14px; overflow: hidden">
+  <div style="display: flex; align-items: flex-start; gap: 10px; background: #FFC21A; color: #0E0E12; border: 1.5px solid #0E0E12; border-radius: 12px; padding: 10px 12px; font-size: 12px; line-height: 1.5">
+    <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true" style="flex: none; margin-top: 1px"><circle cx="9" cy="9" r="7.5" fill="none" stroke="#0E0E12" stroke-width="1.5"></circle><path d="M9 8v5M9 5.2v.1" stroke="#0E0E12" stroke-width="1.8" stroke-linecap="round"></path></svg>
+    <div>Saving works best in your browser. Tap <b>•••</b> at the top, then <b>Open in browser</b>.</div>
+  </div>
+  <h1 style="margin: 0; font-size: 24px; font-weight: 700; line-height: 1.15">Press &amp; hold to save</h1>
+  <div style="align-self: center; width: 270px; height: 480px; flex: none; overflow: hidden; border: 2px solid #FFFFFF; border-radius: 6px">
+    <div style="width: 540px; height: 960px; transform-origin: 0 0; transform: scale(0.5)">
+      <dc-import name="F5Story" hint-size="540px,960px"></dc-import>
+    </div>
+  </div>
+  <ol style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 6px; font-size: 12.5px; line-height: 1.45">
+    <li>Press and hold the image → <b>Save to Photos</b></li>
+    <li>Open Instagram → Story → pick the image</li>
+    <li>Tag <b>@seoul.yolk</b> so we can see it</li>
+  </ol>
+  <a href="F3Result.dc.html" style="align-self: center; font-size: 13px; font-weight: 700; color: #FFFFFF; padding: 4px 8px">← Back to my name</a>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":390,"height":844}}'>
+class Component extends DCLogic {
+  renderVals() {
+    return {};
+  }
+}
+</script>
+</body>
+</html>

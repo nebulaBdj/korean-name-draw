@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>이름 카드 — 계란일보</title>
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;family=Black+Han+Sans&amp;family=IBM+Plex+Sans+KR:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0}
+</style>
+</helmet>
+<div style="width: 397px; height: 561px; box-sizing: border-box; padding: 16px 20px 14px; background: #FFFFFF; color: #161616; font-family: 'IBM Plex Sans KR', sans-serif; display: flex; flex-direction: column; gap: 6px; overflow: hidden">
+  <div style="border-top: 3px solid #161616; border-bottom: 1px solid #161616; height: 2px; flex: none"></div>
+  <div style="display: flex; align-items: flex-end; gap: 8px; flex: none">
+    <div style="flex: 1 1 0; border-bottom: 1px solid #161616; font-size: 12px; padding-bottom: 2px">제 012호</div>
+    <div style="display: flex; align-items: center; gap: 4px">
+      <svg width="30" height="26" viewBox="0 0 30 26" aria-hidden="true">
+        <path d="M15 2c5 0 8 2 11 4s4 5 3 9-1 6-5 8-9 3-13 1S1 20 1 15s2-8 5-10 4-3 9-3z" fill="#FFFFFF" stroke="#161616" stroke-width="1.4"></path>
+        <circle cx="15" cy="14" r="6.5" fill="#F7C430" stroke="#161616" stroke-width="1.2"></circle>
+        <circle cx="12.8" cy="13" r="0.9" fill="#161616"></circle>
+        <circle cx="17.2" cy="13" r="0.9" fill="#161616"></circle>
+        <path d="M13 15.6c1.2 1 2.8 1 4 0" fill="none" stroke="#161616" stroke-width="0.9" stroke-linecap="round"></path>
+      </svg>
+      <div style="font-family: 'Black Han Sans', sans-serif; font-size: 24px; line-height: 1">계란일보</div>
+    </div>
+    <div style="flex: 1 1 0; border-bottom: 1px solid #161616; font-size: 12px; padding-bottom: 2px; text-align: right">2026.10.23–24</div>
+  </div>
+  <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 2px; flex: none">
+    <svg width="18" height="30" viewBox="0 0 18 30" aria-hidden="true">
+      <g stroke="#F7C430" stroke-width="3" stroke-linecap="round">
+        <path d="M8 2l7 6"></path><path d="M2 15h11"></path><path d="M8 28l7-6"></path>
+      </g>
+    </svg>
+    <div style="font-family: 'Anton', sans-serif; font-size: 54px; line-height: 1; letter-spacing: 0.01em">YOUR NAME</div>
+    <svg width="18" height="30" viewBox="0 0 18 30" aria-hidden="true">
+      <g stroke="#4A9BF5" stroke-width="3" stroke-linecap="round">
+        <path d="M10 2L3 8"></path><path d="M16 15H5"></path><path d="M10 28l-7-6"></path>
+      </g>
+    </svg>
+  </div>
+  <div style="position: relative; flex: 1 1 auto; min-height: 0; border: 2.5px solid #161616; border-radius: 4px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; padding: 6px 12px; overflow: hidden">
+    <sc-if value="{{showPlainName}}" hint-placeholder-val="{{ true }}">
+      <div style="font-family: 'Black Han Sans', sans-serif; font-size: 70px; line-height: 1.02; letter-spacing: 0.06em">{{hangul}}</div>
+    </sc-if>
+    <sc-if value="{{showHidden}}" hint-placeholder-val="{{ false }}">
+      <div style="font-family: 'Black Han Sans', sans-serif; font-size: 70px; line-height: 1.02; letter-spacing: 0.06em; filter: blur(7px); color: #3A3A3A">{{hangul}}</div>
+      <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; margin-top: 4px">
+        <div style="width: 70px; height: 8px; background: #D9D9D9; border-radius: 4px"></div>
+        <div style="width: 110px; height: 14px; background: #F7E3A0"></div>
+      </div>
+    </sc-if>
+    <sc-if value="{{showStamp}}" hint-placeholder-val="{{ false }}">
+      <div style="font-family: 'Black Han Sans', sans-serif; font-size: 60px; line-height: 1.05; letter-spacing: 0.06em; color: #D7263D; border: 4px solid #D7263D; border-radius: 10px; padding: 0 14px; transform: rotate(-5deg); opacity: 0.92">{{hangul}}</div>
+    </sc-if>
+    <sc-if value="{{showDetails}}" hint-placeholder-val="{{ true }}">
+      <div style="font-size: 15px; font-weight: 700; letter-spacing: 0.02em">{{roman}}</div>
+      <div style="font-size: 12px; font-weight: 500; background: #F7C430; padding: 1px 9px; margin-top: 2px">“{{meaning}}”</div>
+      <sc-if value="{{hasMessage}}" hint-placeholder-val="{{ true }}">
+        <div style="font-size: 11px; font-style: italic; line-height: 1.35; text-align: center; color: #2B2B2B; max-width: 300px; margin-top: 3px">{{message}}</div>
+      </sc-if>
+    </sc-if>
+    <sc-if value="{{showScratch}}" hint-placeholder-val="{{ false }}">
+      <div style="position: absolute; inset: 5px; border-radius: 3px; background: repeating-linear-gradient(135deg, #BCC2CB 0 7px, #D3D7DD 7px 14px); clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 0 74%, 47% 34%, 41% 24%, 0 54%); display: flex; flex-direction: column; align-items: center; justify-content: flex-end; padding-bottom: 14px; box-sizing: border-box">
+        <div style="font-family: 'Anton', sans-serif; font-size: 22px; letter-spacing: 0.08em; color: #4B5563">SCRATCH HERE</div>
+      </div>
+      <svg width="44" height="44" viewBox="0 0 44 44" aria-hidden="true" style="position: absolute; left: 176px; top: 30px">
+        <circle cx="22" cy="22" r="18" fill="#E9C46A" stroke="#161616" stroke-width="2"></circle>
+        <circle cx="22" cy="22" r="12" fill="none" stroke="#161616" stroke-width="1.2"></circle>
+        <text x="22" y="27" font-size="13" font-weight="700" text-anchor="middle" fill="#161616" font-family="IBM Plex Sans KR, sans-serif">₩</text>
+      </svg>
+    </sc-if>
+  </div>
+  <div style="border-top: 1.5px solid #161616; margin-top: 2px; flex: none"></div>
+  <svg width="357" height="128" viewBox="0 0 357 128" role="img" aria-label="성수역에서 성수이로를 따라 내려와 성수이로20길로 좌회전, 연무장13길 안쪽 더가배성수까지 걸어서 약 5분" style="display: block; flex: none; font-family: 'IBM Plex Sans KR', sans-serif">
+    <g stroke="#E3E3E3" stroke-linecap="butt" fill="none">
+      <path d="M-4 10H361" stroke-width="16"></path>
+      <path d="M96 0V128" stroke-width="14"></path>
+      <path d="M96 52H361" stroke-width="10"></path>
+      <path d="M-4 114H361" stroke-width="14"></path>
+      <path d="M262 52V114" stroke-width="8"></path>
+    </g>
+    <path d="M-4 10H361" stroke="#00A84D" stroke-width="3"></path>
+    <path d="M110 114H361" stroke="#FFFFFF" stroke-width="1.5" stroke-dasharray="8 8"></path>
+    <text x="298" y="7" font-size="8" fill="#6B6B6B">Achasan-ro</text>
+    <text x="104" y="125" font-size="8" fill="#6B6B6B">Yeonmujang-gil</text>
+    <text x="266" y="110" font-size="8" fill="#6B6B6B">13-gil</text>
+    <circle cx="30" cy="30" r="12" fill="#00A84D" stroke="#FFFFFF" stroke-width="2"></circle>
+    <rect x="24" y="22" width="12" height="13" rx="3" fill="none" stroke="#FFFFFF" stroke-width="1.6"></rect>
+    <path d="M24 28h12" stroke="#FFFFFF" stroke-width="1.3"></path>
+    <rect x="2" y="45" width="74" height="16" rx="8" fill="#00A84D"></rect>
+    <text x="39" y="57" font-size="10" font-weight="700" fill="#FFFFFF" text-anchor="middle">Seongsu Stn.</text>
+    <rect x="22" y="70" width="20" height="18" fill="#FFF3CC" stroke="#161616" stroke-width="1.3"></rect>
+    <rect x="27" y="76" width="10" height="7" fill="#F7C430" stroke="#161616" stroke-width="0.9"></rect>
+    <text x="4" y="101" font-size="8.5" font-weight="700" fill="#161616">Daelim Changgo</text>
+    <rect x="132" y="22" width="20" height="18" fill="#FFF3CC" stroke="#161616" stroke-width="1.3"></rect>
+    <rect x="137" y="28" width="10" height="7" fill="#F7C430" stroke="#161616" stroke-width="0.9"></rect>
+    <text x="157" y="35" font-size="9.5" font-weight="700" fill="#161616">STAND OIL</text>
+    <rect x="124" y="66" width="20" height="18" fill="#FFF3CC" stroke="#161616" stroke-width="1.3"></rect>
+    <rect x="129" y="72" width="10" height="7" fill="#F7C430" stroke="#161616" stroke-width="0.9"></rect>
+    <text x="149" y="79" font-size="9.5" font-weight="700" fill="#161616">Miffy Store</text>
+    <path d="M96 20V52H262V78H268" fill="none" stroke="#E8336B" stroke-width="3" stroke-dasharray="6 4" stroke-linecap="round"></path>
+    <path d="M267 71l9 7-9 7z" fill="#E8336B"></path>
+    <text x="172" y="49" font-size="10" font-weight="700" fill="#E8336B">≈5 min walk</text>
+    <rect x="278" y="62" width="64" height="40" fill="#2B2B2B" stroke="#161616" stroke-width="1.4"></rect>
+    <text x="310" y="78" font-size="9" font-weight="700" fill="#FFFFFF" text-anchor="middle" letter-spacing="1">THE GABAE</text>
+    <g fill="#9CC3E6">
+      <rect x="284" y="84" width="9" height="13"></rect><rect x="296" y="84" width="9" height="13"></rect><rect x="308" y="84" width="9" height="13"></rect><rect x="320" y="84" width="9" height="13"></rect><rect x="332" y="84" width="6" height="13"></rect>
+    </g>
+    <path d="M326 64c-5-6-8-9-8-13a8 8 0 0 1 16 0c0 4-3 7-8 13z" fill="#E8475B" stroke="#161616" stroke-width="1.2"></path>
+    <circle cx="326" cy="50" r="2.8" fill="#FFFFFF"></circle>
+    <rect x="236" y="22" width="80" height="18" rx="5" fill="#161616"></rect>
+    <text x="276" y="35" font-size="9.5" font-weight="700" fill="#FFFFFF" text-anchor="middle">더가배성수</text>
+  </svg>
+  <div style="background: #EFEFEF; border-radius: 10px; padding: 4px 10px; font-size: 10.5px; line-height: 1.35; flex: none"><b>The Gabae Seongsu</b> · Oct 23–24, 12:00–19:00<br>11, Yeonmujang 13-gil, Seongdong-gu, Seoul</div>
+  <div style="display: flex; align-items: center; justify-content: space-between; gap: 4px; padding-top: 2px; flex: none">
+    <div style="display: flex; flex-direction: column; align-items: flex-start; gap: 5px">
+      <div style="display: flex; align-items: center; gap: 2px">
+        <svg width="8" height="14" viewBox="0 0 12 20" aria-hidden="true">
+          <g stroke="#F7C430" stroke-width="2.4" stroke-linecap="round"><path d="M5 2l5 4"></path><path d="M1 10h8"></path><path d="M5 18l5-4"></path></g>
+        </svg>
+        <div style="font-family: 'Anton', sans-serif; font-size: 14px; line-height: 1.1; letter-spacing: 0; white-space: nowrap">You can take a photo here with your Korean name!</div>
+        <svg width="8" height="14" viewBox="0 0 12 20" aria-hidden="true">
+          <g stroke="#4A9BF5" stroke-width="2.4" stroke-linecap="round"><path d="M7 2L2 6"></path><path d="M11 10H3"></path><path d="M7 18l-5-4"></path></g>
+        </svg>
+      </div>
+      <div style="display: flex; align-items: baseline; gap: 2px; padding-left: 10px">
+        <span style="font-family: 'Anton', sans-serif; font-size: 13px; line-height: 1">@</span>
+        <span style="font-size: 12px; font-weight: 700; line-height: 1">seoul.yolk</span>
+      </div>
+    </div>
+    <img src="/_blob/fad2b676a9dfbb6bc8df8d34676c1bd9" alt="@seoul.yolk 인스타그램 QR" style="width: 57px; height: 57px; display: block; flex: none; margin-right: -5px; margin-left: -4px">
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props='{"hangul":{"editor":"text","default":"가람"},"roman":{"editor":"text","default":"Ga-ram"},"meaning":{"editor":"text","default":"River"},"message":{"editor":"text","default":"Like a river to the sea, your dreams will come true."},"mode":{"editor":"enum","options":["plain","hidden","scratch","stamp"],"default":"plain"},"$preview":{"width":397,"height":561}}'>
+class Component extends DCLogic {
+  renderVals() {
+    const mode = this.props.mode ?? 'plain';
+    const message = this.props.message ?? 'Like a river to the sea, your dreams will come true.';
+    return {
+      hangul: this.props.hangul ?? '가람',
+      roman: this.props.roman ?? 'Ga-ram',
+      meaning: this.props.meaning ?? 'River',
+      message: message,
+      hasMessage: !!message,
+      showPlainName: mode === 'plain' || mode === 'scratch',
+      showHidden: mode === 'hidden',
+      showStamp: mode === 'stamp',
+      showDetails: mode !== 'hidden',
+      showScratch: mode === 'scratch'
+    };
+  }
+}
+</script>
+</body>
+</html>
