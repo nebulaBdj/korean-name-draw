@@ -30,7 +30,23 @@
 /* 종이 아래쪽부터 한 줄씩 끊기듯 내려온다 */
 .feed {
   margin: 0 auto;
-  animation: feed 1.6s steps(14, end) forwards;
+  animation: feed 1.8s cubic-bezier(0.25, 0.1, 0.2, 1) forwards;
+  will-change: transform;
+}
+
+.fadeIn {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 .blank {
@@ -59,7 +75,8 @@
 
 @media (prefers-reduced-motion: reduce) {
   .feed,
-  .blink {
+  .blink,
+  .fadeIn {
     animation: none;
   }
 }

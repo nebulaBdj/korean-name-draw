@@ -45,6 +45,10 @@ function EmptyReceipt() {
         <Leader label="Newspaper card" value="1" />
         <Leader label="Booth coupon" value="1" />
         <Dash />
+        <Leader label="이름 NAME" value="? ?" />
+        <Leader label="뜻 MEANING" value="???" />
+        <Leader label="발음 SAY IT" value="▶" />
+        <Dash />
         <Leader label="TOTAL" value="₩0 FREE" fontSize={14} strong />
         <Dash />
         <Barcode />
@@ -69,7 +73,11 @@ export default function LandingPage() {
               <br />
               Korean name?
             </h1>
-            <p className={styles.subtitle}>Get a free Korean name made from native Korean words.</p>
+            <p className={styles.subtitle}>
+              Get a free Korean name
+              <br />
+              made from native Korean words.
+            </p>
           </>
         }
         receipt={<EmptyReceipt />}

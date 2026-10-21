@@ -1,9 +1,10 @@
-// localStorage·sessionStorage 접근은 여기 한 곳에서 try/catch로 감싼다 (CLAUDE.md)
+// 브라우저 저장소 접근은 여기 한 곳에서 try/catch로 감싼다 (CLAUDE.md)
+// 뽑기 기록은 sessionStorage: 새로고침해도 결과는 남고, 탭을 닫으면 다시 뽑을 수 있다 (10-21 결정)
 
 const DRAW_KEY = "yolk:draw";
 const SOURCE_KEY = "yolk:src";
 
-// 이 브라우저에서 마지막으로 뽑은 결과
+// 이 탭에서 마지막으로 뽑은 결과
 export type DrawRecord = {
   nameId: string;
   code: string;
@@ -29,17 +30,16 @@ function writeJson(storage: () => Storage, key: string, value: unknown): void {
   }
 }
 
-const local = () => window.localStorage;
 const session = () => window.sessionStorage;
 
 export function readDraw(): DrawRecord | null {
-  return readJson<DrawRecord>(local, DRAW_KEY);
+  return readJson<DrawRecord>(session, DRAW_KEY);
 }
 
 // useSyncExternalStore 스냅샷: 같은 값이면 같은 문자열이라 다시 그리지 않는다
 export function getDrawSnapshot(): string | null {
   try {
-    return window.localStorage.getItem(DRAW_KEY);
+    return window.sessionStorage.getItem(DRAW_KEY);
   } catch {
     return null;
   }
@@ -55,7 +55,7 @@ export function parseDraw(raw: string | null): DrawRecord | null {
 }
 
 export function writeDraw(record: DrawRecord): void {
-  writeJson(local, DRAW_KEY, record);
+  writeJson(session, DRAW_KEY, record);
   listeners.forEach((listener) => listener());
 }
 

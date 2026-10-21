@@ -57,18 +57,19 @@ export function DrawStage({ intro, receipt }: DrawStageProps) {
       goToResult(name.id);
       return;
     }
+    window.scrollTo({ top: 0 });
     setPrinting({ name, record });
   };
 
   if (printing) {
     return (
       <>
-        <div className={screen.title} role="status">
+        <div className={`${screen.title} ${styles.fadeIn}`} role="status">
           Printing your
           <br />
           Korean name…
         </div>
-        <div className={styles.printing}>
+        <div className={`${styles.printing} ${styles.fadeIn}`}>
           <span className={styles.blink} />
           PRINTING…
         </div>

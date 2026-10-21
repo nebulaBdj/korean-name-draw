@@ -94,7 +94,7 @@
 - `prefers-reduced-motion`이면 연출 없이 바로 결과. 소리는 없다.
 
 ### 3-3. 결과 `/names/[id]` (뽑은 사람)
-- localStorage에 이 이름을 뽑은 기록이 있으면 이 화면이다(없으면 3-8).
+- 이 탭의 sessionStorage에 이 이름을 뽑은 기록이 있으면 이 화면이다(없으면 3-8).
 - 위: `PRINTED!` + 발급 시각
 - 프린터 슬롯에서 이어져 나온 **한 장의 종이**(폭 300px):
   1. **신문 카드** (NameCard, §7-4) — 저장·공유 이미지와 같은 그림
@@ -126,7 +126,7 @@
 - `← Back to my name`
 
 ### 3-6. 재방문
-- 같은 브라우저로 `/`를 다시 열면 마지막 결과 주소로 안내한다(`See my name →`). 결과와 쿠폰 코드는 localStorage에 있다. 접근이 막힌 브라우저에서도 화면이 깨지지 않게 try/catch.
+- 같은 탭에서 `/`를 다시 열면 마지막 결과 주소로 안내한다(`See my name →`). 결과와 쿠폰 코드는 sessionStorage에 있다. 탭을 닫으면 지워져 다시 뽑을 수 있다(10-21 결정: 다시 뽑기 쉽게. 그만큼 쿠폰이 더 발급될 수 있다). 접근이 막힌 브라우저에서도 화면이 깨지지 않게 try/catch.
 
 ### 3-7. 행사 종료 후 (`endsAt` 이후)
 - 쿠폰을 발급하지 않는다.
@@ -179,7 +179,7 @@
 - 지어낸 코드는 시트에 없으므로 부스에서 걸러진다.
 
 ### 5-2. 전달 실패
-- 네트워크 오류로 전달되지 않으면 localStorage의 `sent: false`로 남고, 결과 화면을 다시 열 때 재전송한다.
+- 네트워크 오류로 전달되지 않으면 sessionStorage의 `sent: false`로 남고, 결과 화면을 다시 열 때 재전송한다.
 - 그래도 시트에 없으면 부스에서 결과 화면을 확인하고 시트 맨 아래에 직접 한 줄 추가(코드 칸에 화면의 코드) 후 할인한다.
 - `NEXT_PUBLIC_COUPON_URL`이 없으면 코드 대신 `Show this screen at the booth`를 보여준다.
 - 다시 뽑기·재방문 때는 같은 코드를 쓴다(1인 1쿠폰).
@@ -352,7 +352,7 @@ export const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION; // Sea
 
 1. **뼈대:** Next.js 생성, `config/site.ts`·`data/names.json` 연결, 랜딩(F1) 정적 화면 + 기본 metadata → **이 단계 끝나면 바로 배포**
 2. **쿠폰:** `apps-script/Code.gs` 확인 → 동준이 시트에 붙여 웹 앱으로 배포 → 주소를 `NEXT_PUBLIC_COUPON_URL`에 넣기
-3. **뽑기·결과:** 인쇄 연출(F2), 무작위 선택, 쿠폰 요청·실패 처리, localStorage, `/names/[id]` 결과(F3)와 이름 페이지(3-8), 자모 분해, 발음 듣기, 다시 뽑기 1회
+3. **뽑기·결과:** 인쇄 연출(F2), 무작위 선택, 쿠폰 생성·기록, sessionStorage, `/names/[id]` 결과(F3)와 이름 페이지(3-8), 자모 분해, 발음 듣기, 다시 뽑기 1회
 4. **SEO:** `/names` 목록, 페이지별 metadata·canonical, 랜딩 아래 본문·FAQ, sitemap·robots, 구조화 데이터, OG 이미지, Search Console 확인 태그
 5. **이미지·공유:** 카드 템플릿 PNG 생성, canvas 1080×1920(F5), 공유·길게 눌러 저장(F4·F6), 인앱 안내
 6. **분석:** gtag 삽입, 이벤트 7종
@@ -386,7 +386,7 @@ export const GSC_VERIFICATION = process.env.NEXT_PUBLIC_GSC_VERIFICATION; // Sea
 
 ### 16-3. 주소 규칙 (파라미터 URL 폭증 방지)
 - 크롤링되는 `<a href>`에는 쿼리 파라미터를 넣지 않는다. UTM은 외부 링크(QR·인스타)에만 붙인다.
-- 뽑기 결과·쿠폰·연출 상태는 localStorage와 onClick 라우팅으로 다룬다. 결과 주소는 `/names/[id]` 하나뿐이다.
+- 뽑기 결과·쿠폰·연출 상태는 sessionStorage와 onClick 라우팅으로 다룬다. 결과 주소는 `/names/[id]` 하나뿐이다.
 - 끝 슬래시 규칙을 하나로 통일하고, 없는 이름 id는 404를 돌려준다.
 
 ### 16-4. 구조화 데이터 (JSON-LD)

@@ -36,10 +36,10 @@ apps-script/Code.gs       쿠폰 발급 스크립트
 - 원본 데이터를 내려보내고, 파생 값은 쓰는 곳 옆에서 계산한다.
 - 가공은 이름 있는 순수 함수의 합성으로 만든다(예: `decomposeSyllable` → `romanizeJamo`).
 - 행사·쿠폰처럼 바뀌는 값은 config로 주입한다. 공용화는 중복이 두 번째 확인된 뒤에 한다.
-- localStorage 접근은 `lib/storage.ts` 한 곳에서 try/catch로 감싼다.
+- 브라우저 저장소(sessionStorage) 접근은 `lib/storage.ts` 한 곳에서 try/catch로 감싼다.
 
 ## SEO 규칙 (SPEC §16)
 - 검색엔진이 보는 HTML에 본문이 들어가야 한다. 클라이언트 컴포넌트는 인쇄 연출·쿠폰·공유·발음만.
-- 크롤링되는 `<a href>`에 쿼리 파라미터 금지. UTM은 외부 링크에만, 화면 상태는 localStorage·onClick.
+- 크롤링되는 `<a href>`에 쿼리 파라미터 금지. UTM은 외부 링크에만, 화면 상태는 sessionStorage·onClick.
 - 페이지마다 metadata(title·description·canonical·OG), h1은 하나.
 - 한글 폰트는 쓰는 화면에서만 `next/font`로 불러오고 preload를 끈다.

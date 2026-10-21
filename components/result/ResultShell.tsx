@@ -60,6 +60,8 @@ export function ResultShell({ name, title, card, receipt, visitor }: ResultShell
   }, [record]);
 
   const over = isEventOver();
+  // 방금 인쇄하고 넘어왔으면 도착 모션을 준다
+  const justPrinted = isMine && !!record && Date.now() - new Date(record.issuedAt).getTime() < 5000;
 
   const tryAgain = () => {
     if (!record) return;
@@ -117,6 +119,7 @@ export function ResultShell({ name, title, card, receipt, visitor }: ResultShell
         <Slot width={324} />
         <Paper
           width={300}
+          className={justPrinted ? styles.arrivePaper : ""}
           top={
             <>
               <div className={receiptStyles.cardTop}>{card}</div>
@@ -136,7 +139,7 @@ export function ResultShell({ name, title, card, receipt, visitor }: ResultShell
       </div>
 
       {isMine && record ? (
-        <div className={styles.actions}>
+        <div className={`${styles.actions} ${justPrinted ? styles.arriveActions : ""}`}>
           <button type="button" className={`${screen.button} ${screen.buttonWhite}`} onClick={shareStory}>
             SHARE TO MY STORY
           </button>
