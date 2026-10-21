@@ -36,8 +36,8 @@
 
 .sticker {
   position: absolute;
-  right: -18px;
-  top: -6px;
+  right: -20px;
+  top: 12px;
   width: 64px;
   height: 64px;
   border-radius: 50%;
@@ -59,9 +59,16 @@
 }
 
 .stickerSub {
-  font-size: 8.5px;
+  font-size: 8px;
   line-height: 1.2;
   margin-top: 3px;
+}
+
+.itemNote {
+  margin: -1px 0 3px 10px;
+  font-size: 10.5px;
+  line-height: 1.35;
+  color: var(--ink-sub);
 }
 
 .eventLine {

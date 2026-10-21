@@ -73,8 +73,8 @@
 - 제목(h1) `What's your Korean name?`, 부제 `Get a free Korean name made from native Korean words.`
 - 가운데: 프린터 슬롯 + 아직 비어 있는 영수증
   - `YOLK MART 24` / `Seongsu pop-up` (시각 줄 없음, 10-21 가독성 개선)
-  - 받는 것만: `Korean name ··· 1`, `Newspaper card ··· 1`, `Booth coupon ··· 1`, `TOTAL ··· ₩0 FREE`, 바코드, `감사합니다! Thank you!`
-  - 오른쪽 위 `FREE` 스티커(`10 sec`). 1+1은 뜻이 애매해 뺐다
+  - 받는 것과 설명: `Korean name ··· 1` (+ meaning & how to say it), `Newspaper card ··· 1` (+ image for your IG story), `Booth coupon ··· 1` (discount on a real newspaper photo, 행사 중에만), `TOTAL ··· ₩0 FREE`, 바코드, `감사합니다! Thank you!`
+  - 오른쪽 위 `FREE` 스티커(`no sign-up`). 1+1은 뜻이 애매해 뺐다
 - 버튼 하나: `PRINT MY NAME →`
 - 아래: `Oct 23–24 · The Gabae Seongsu · 12:00–19:00`
 - **스크롤 아래 (검색용 본문, 같은 영수증 스타일)**

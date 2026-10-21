@@ -27,12 +27,22 @@ function FreeSticker() {
   return (
     <div className={styles.sticker} aria-hidden="true">
       <div className={styles.stickerMain}>FREE</div>
-      <div className={styles.stickerSub}>10 sec</div>
+      <div className={styles.stickerSub}>no sign-up</div>
     </div>
   );
 }
 
-// 아직 이름이 인쇄되지 않은 빈 영수증: 무엇을 받는지만 보여준다
+// 받는 것 한 줄 + 무엇인지 설명 한 줄
+function Item({ label, note }: { label: string; note: string }) {
+  return (
+    <>
+      <Leader label={label} value="1" strong />
+      <div className={styles.itemNote}>{note}</div>
+    </>
+  );
+}
+
+// 아직 이름이 인쇄되지 않은 빈 영수증: 무엇을 받는지 보여준다
 function EmptyReceipt() {
   return (
     <div className={styles.stage}>
@@ -41,17 +51,15 @@ function EmptyReceipt() {
         <div className={styles.storeName}>YOLK MART 24</div>
         <div className={styles.center}>Seongsu pop-up</div>
         <Dash />
-        <Leader label="Korean name" value="1" />
-        <Leader label="Newspaper card" value="1" />
-        <Leader label="Booth coupon" value="1" />
-        <Dash />
-        <Leader label="이름 NAME" value="? ?" />
-        <Leader label="뜻 MEANING" value="???" />
-        <Leader label="발음 SAY IT" value="▶" />
+        <Item label="Korean name" note="+ meaning & how to say it" />
+        <Item label="Newspaper card" note="+ image for your IG story" />
+        <DuringEvent>
+          <Item label="Booth coupon" note="discount on a real newspaper photo" />
+        </DuringEvent>
         <Dash />
         <Leader label="TOTAL" value="₩0 FREE" fontSize={14} strong />
         <Dash />
-        <Barcode />
+        <Barcode height={32} />
         <div className={styles.center} style={{ marginTop: 6 }}>
           감사합니다! Thank you!
         </div>
