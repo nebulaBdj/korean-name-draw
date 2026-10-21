@@ -1,12 +1,24 @@
 /**
  * 쿠폰 발급 — 구글 시트에 붙여 쓰는 Apps Script (SPEC §5)
- * 1. 구글 시트에 '쿠폰' 시트를 만들고 1행에 제목: 코드 | 발급 시각 | 이름 id | 유입 | 사용 | 사용 시각
+ * 1. 새 구글 시트에서 확장 프로그램 > Apps Script에 이 파일을 붙여 넣는다.
+ * 2. setup()을 한 번 실행한다. '쿠폰' 시트와 1행 제목이 만들어진다.
  *    (E열 전체에 체크박스를 미리 넣지 않는다. 스크립트가 줄마다 넣는다)
- * 2. 확장 프로그램 > Apps Script에 이 파일을 붙여 넣는다.
  * 3. 배포 > 새 배포 > 웹 앱 (실행: 나, 액세스: 모든 사용자) → 나온 주소를 NEXT_PUBLIC_COUPON_URL에 넣는다.
  */
 const SHEET_NAME = '쿠폰';
+const HEADERS = ['코드', '발급 시각', '이름 id', '유입', '사용', '사용 시각'];
 const CHARS = 'ABCDEFGHJKMNPQRSTUVWXYZ23456789';
+
+// 시트 서식 한 번 만들기. 이미 '쿠폰' 시트가 있으면 제목 줄만 다시 맞춘다.
+function setup() {
+  const ss = SpreadsheetApp.getActive();
+  const sheet = ss.getSheetByName(SHEET_NAME) || ss.getSheets()[0].setName(SHEET_NAME);
+  sheet.getRange(1, 1, 1, HEADERS.length).setValues([HEADERS]).setFontWeight('bold').setBackground('#FFC21A');
+  sheet.setFrozenRows(1);
+  sheet.getRange('B:B').setNumberFormat('yyyy-mm-dd hh:mm:ss');
+  sheet.getRange('F:F').setNumberFormat('yyyy-mm-dd hh:mm:ss');
+  sheet.setColumnWidths(1, HEADERS.length, 140);
+}
 
 function doGet(e) {
   const lock = LockService.getScriptLock();
