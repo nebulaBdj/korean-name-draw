@@ -9,7 +9,7 @@
 
 .subtitle {
   margin: 0;
-  font-size: 13.5px;
+  font-size: 15px;
   line-height: 1.5;
   color: var(--on-cobalt-sub);
 }
@@ -73,7 +73,7 @@
 
 .eventLine {
   text-align: center;
-  font-size: 12.5px;
+  font-size: 13.5px;
 }
 
 /* 스크롤 아래: 검색용 본문 (SPEC §3-1) */
@@ -88,13 +88,13 @@
 
 .aboutBody h2 {
   margin: 0 0 6px;
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 0.02em;
 }
 
 .aboutBody h3 {
   margin: 10px 0 2px;
-  font-size: 13px;
+  font-size: 14px;
 }
 
 .aboutBody p,

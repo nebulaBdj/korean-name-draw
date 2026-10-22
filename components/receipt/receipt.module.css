@@ -24,7 +24,7 @@
 .body {
   background: var(--paper);
   padding: 20px 16px 12px;
-  font-size: 12px;
+  font-size: 13px;
   line-height: 1.55;
   color: var(--ink);
 }
@@ -175,7 +175,7 @@
 
 .couponNote {
   text-align: center;
-  font-size: 11px;
+  font-size: 12px;
   line-height: 1.45;
   color: var(--ink-sub);
 }

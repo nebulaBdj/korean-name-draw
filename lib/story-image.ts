@@ -28,7 +28,7 @@ async function loadFonts(name: KoreanName): Promise<void> {
   await Promise.all([
     document.fonts.load(`400 70px ${family(blackHanSans)}`, name.hangul),
     document.fonts.load(`700 15px ${family(ibmPlexSansKr)}`, text),
-    document.fonts.load(`500 12px ${family(ibmPlexSansKr)}`, text),
+    document.fonts.load(`500 14px ${family(ibmPlexSansKr)}`, text),
     document.fonts.load(`700 48px ${family(spaceMono)}`, "MY KOREAN NAME IS"),
     document.fonts.load(`700 28px ${family(nanumGothicCoding)}`, "YOLK MART 24 · 성수 팝업점"),
     document.fonts.load(`400 28px ${family(nanumGothicCoding)}`, EVENT.venue),
@@ -61,7 +61,7 @@ function drawNameBox(ctx: CanvasRenderingContext2D, name: KoreanName): void {
   ctx.font = `400 ${s(70)}px ${family(blackHanSans)}`;
   const hangulHeight = s(70 * 1.02);
   const romanHeight = s(15 * 1.4);
-  const meaningHeight = s(12 * 1.5 + 2);
+  const meaningHeight = s(14 * 1.5 + 2);
   ctx.font = `italic 400 ${s(11)}px ${family(ibmPlexSansKr)}`;
   const messageLines = name.message ? wrapText(ctx, name.message, s(300)) : [];
   const messageHeight = messageLines.length ? s(3) + messageLines.length * s(11 * 1.35) : 0;
@@ -81,7 +81,7 @@ function drawNameBox(ctx: CanvasRenderingContext2D, name: KoreanName): void {
   ctx.fillText(name.roman, centerX, y + romanHeight / 2);
   y += romanHeight + gap + s(2);
 
-  ctx.font = `500 ${s(12)}px ${family(ibmPlexSansKr)}`;
+  ctx.font = `500 ${s(14)}px ${family(ibmPlexSansKr)}`;
   const meaning = `“${name.meaning}”`;
   const bandWidth = ctx.measureText(meaning).width + s(18);
   ctx.fillStyle = "#F7C430";

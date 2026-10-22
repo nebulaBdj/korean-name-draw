@@ -19,7 +19,10 @@ export function EventLine({ className }: { className?: string }) {
           </a>
         </>
       ) : (
-        `${EVENT.dates} · ${EVENT.venue} · ${EVENT.hours}`
+        <>
+          {EVENT.dates} · {EVENT.venue} · {/* 좁은 화면에서 시간이 중간에 끊기지 않게 */}
+          <span style={{ whiteSpace: "nowrap" }}>{EVENT.hours}</span>
+        </>
       )}
     </div>
   );

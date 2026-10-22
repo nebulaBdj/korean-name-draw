@@ -11,7 +11,7 @@ export function NameReceipt({ name }: { name: KoreanName }) {
   return (
     <>
       <ItemRow tone="sub" label="품목 ITEM" value="수량 QTY" />
-      <ItemRow label={`${name.hangul} · ${name.roman} (${name.meaning})`} value="1" big />
+      <ItemRow label={`${name.hangul} · ${name.roman}`} value="1" big />
       <ItemRow label="신문 카드 Newspaper card" value="1" />
       <Dash />
       <div className={styles.sub}>읽는 법 HOW TO READ</div>
