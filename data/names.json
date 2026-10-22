@@ -34,7 +34,7 @@
   { "id": "hanbit",    "hangul": "한빛", "roman": "Han-bit",    "meaning": "One great light",                               "tags": ["light"] },
   { "id": "hansol",    "hangul": "한솔", "roman": "Han-sol",    "meaning": "A tall pine tree",                              "tags": ["loyal", "strong"] },
   { "id": "geuru",     "hangul": "그루", "roman": "Geu-ru",     "meaning": "A tree standing tall",                          "tags": ["growth"] },
-  { "id": "narin",     "hangul": "나린", "roman": "Na-rin",     "meaning": "Sent down from the sky",                        "tags": ["luck"] },
+  { "id": "narin",     "hangul": "나린", "roman": "Na-rin",     "meaning": "A blessing sent down from the sky",                 "tags": ["luck"] },
   { "id": "yeoul",     "hangul": "여울", "roman": "Yeo-ul",     "meaning": "A rippling stream",                             "tags": ["calm", "nature"] },
   { "id": "haesol",    "hangul": "해솔", "roman": "Hae-sol",    "meaning": "A pine tree standing in the sunshine",          "tags": ["growth", "warmth"] },
   { "id": "pureum",    "hangul": "푸름", "roman": "Pu-reum",    "meaning": "Fresh green; evergreen",                        "tags": ["growth", "nature"] },
