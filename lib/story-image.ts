@@ -12,6 +12,8 @@ const NAME_BOX = { x: 20, y: 120, w: 357, h: 176 }; // 카드 안 이름 칸 (�
 const TEMPLATE_SRC = "/card-template.png"; // 이름 칸을 비운 카드 2배 PNG
 
 const family = (font: { style: { fontFamily: string } }) => font.style.fontFamily;
+// 불러올 때는 첫 글꼴만. 대체 글꼴(local("Arial"))은 안드로이드에 없어 목록째 넘기면 load가 실패한다
+const primary = (font: { style: { fontFamily: string } }) => family(font).split(",")[0];
 
 function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -22,18 +24,19 @@ function loadImage(src: string): Promise<HTMLImageElement> {
   });
 }
 
-// 폰트를 다 불러온 뒤 그린다 (대체 폰트로 그려지는 것 방지)
+// 폰트를 불러온 뒤 그린다 (대체 폰트로 그려지는 것 방지). 하나가 실패하거나 늦어도 이미지는 만든다
 async function loadFonts(name: KoreanName): Promise<void> {
   const text = `${name.hangul}${name.roman}${name.meaning}${name.message ?? ""}`;
-  await Promise.all([
-    document.fonts.load(`400 70px ${family(blackHanSans)}`, name.hangul),
-    document.fonts.load(`700 15px ${family(ibmPlexSansKr)}`, text),
-    document.fonts.load(`500 14px ${family(ibmPlexSansKr)}`, text),
-    document.fonts.load(`700 48px ${family(spaceMono)}`, "MY KOREAN NAME IS"),
-    document.fonts.load(`700 28px ${family(nanumGothicCoding)}`, "YOLK MART 24 · 성수 팝업점"),
-    document.fonts.load(`400 28px ${family(nanumGothicCoding)}`, EVENT.venue),
-  ]);
-  await document.fonts.ready;
+  const loads = [
+    document.fonts.load(`400 70px ${primary(blackHanSans)}`, name.hangul),
+    document.fonts.load(`700 15px ${primary(ibmPlexSansKr)}`, text),
+    document.fonts.load(`500 14px ${primary(ibmPlexSansKr)}`, text),
+    document.fonts.load(`700 48px ${primary(spaceMono)}`, "MY KOREAN NAME IS"),
+    document.fonts.load(`700 28px ${primary(nanumGothicCoding)}`, "YOLK MART 24 · 성수 팝업점"),
+    document.fonts.load(`400 28px ${primary(nanumGothicCoding)}`, EVENT.venue),
+  ];
+  const timeout = new Promise((resolve) => setTimeout(resolve, 5000));
+  await Promise.race([Promise.allSettled(loads), timeout]);
 }
 
 // 최대 폭을 넘으면 단어 단위로 줄을 나눈다

@@ -27,7 +27,9 @@ export function StoryFallback({ imageUrl, inApp, onBack }: StoryFallbackProps) {
         // eslint-disable-next-line @next/next/no-img-element -- 방금 만든 blob 이미지
         <img className={styles.storyImage} src={imageUrl} alt="My Korean name story image" width={270} height={480} />
       ) : (
-        <div className={styles.storyImage} />
+        <div className={`${styles.storyImage} ${styles.storyLoading}`} aria-live="polite">
+          Making your image…
+        </div>
       )}
       <ol className={styles.steps}>
         <li>

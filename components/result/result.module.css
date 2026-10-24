@@ -182,6 +182,15 @@
   -webkit-touch-callout: default;
 }
 
+/* 이미지가 아직 만들어지는 중 */
+.storyLoading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+}
+
 .steps {
   margin: 0;
   padding-left: 20px;
